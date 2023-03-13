@@ -1,3 +1,5 @@
 Dear {{ $data['firstname'] }} {{ $data['lastname'] }},
 
-your contact information was added!
+we appreciate you choosing our contact saving service. Your information was added successfully!
+
+Best regards

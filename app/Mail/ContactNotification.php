@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -16,7 +17,7 @@ class ContactNotification extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $contactData
      */
     public function __construct($contactData)
     {
@@ -28,7 +29,7 @@ class ContactNotification extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): ContactNotification
     {
         return $this->view('emails.notification')->with('data', $this->contactData);
     }

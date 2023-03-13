@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h4 class="mt-2">Add contact information</h4>
+            <h4 class="mt-2">New contact information</h4>
         </div>
         <div class="card-body">
             <form @submit.prevent="create">
@@ -48,11 +48,11 @@
                     </div>
                 </div>
                 <div class="mb-3 row g-2">
-                    <div class="col-md">
+                    <div class="col-md mr-3">
                         <div class="form-floating">
                             <input type="text" id="contactZip" class="form-control" pattern="\d{5,5}(-\d{4,4})?"
                                    v-model="contact.zip" placeholder="">
-                            <label for="contactZip">Zip code (5 digits)</label>
+                            <label for="contactZip">Zip code <span>(5 digits)</span></label>
                         </div>
                     </div>
                     <div class="col-md">
@@ -78,6 +78,17 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+input:required + label:after {
+    content: ' *';
+    color: darkred;
+}
+
+label > span {
+    color: lightgray;
+}
+</style>
 
 <script>
 export default {

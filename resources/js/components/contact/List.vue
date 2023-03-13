@@ -1,16 +1,16 @@
 <template>
     <div class="row">
-        <div class="col-12 mb-2 text-end">
-            <router-link :to='{name:"contactAdd"}' class="btn btn-primary">Add new contact information</router-link>
-        </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Contact</h4>
+                    <h4 class="col-3">Contacts</h4>
+                    <div class="col-9 mb-2 mt-2 text-end">
+                        <router-link :to='{name:"contactAdd"}' class="btn btn-primary">Add new contact information</router-link>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -29,7 +29,9 @@
                                 <td>{{ contact.street }} {{ contact.housenumber }}</td>
                                 <td>{{ contact.zip }} {{ contact.city }}</td>
                                 <td>
-                                    <button type="button" @click="deleteContact(contact.id)" class="btn btn-danger">Delete</button>
+                                    <button type="button" @click="deleteContact(contact.id)" class="btn btn-danger">
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -46,34 +48,41 @@
     </div>
 </template>
 
+<style scoped>
+.card-header > * {
+    display: inline-block;
+}
+</style>
+
 <script>
 export default {
-    name:"contacts",
-    data(){
+    name: "contacts",
+    data() {
         return {
-            contacts:[],
-            messages:''
+            contacts: [],
+            messages: ''
         }
     },
-    mounted(){
+    mounted() {
         this.getContacts()
     },
-    methods:{
-        async getContacts(){
-            await this.axios.get('/api/contact').then(response=>{
-                this.contacts = response.data
-            }).catch(error=>{
+    methods: {
+        async getContacts() {
+            await this.axios.get('/api/contact').then(response => {
+                this.contacts = response.data;
+                console.log(this.$route.state);
+            }).catch(error => {
                 console.log(error)
                 this.contacts = []
             })
         },
-        deleteContact(id){
-                this.axios.delete(`/api/contact/${id}`).then(response=>{
-                    this.getContacts()
-                }).catch(error=>{
-                    console.log(error)
-                })
-            }
+        deleteContact(id) {
+            this.axios.delete(`/api/contact/${id}`).then(response => {
+                this.getContacts()
+            }).catch(error => {
+                console.log(error)
+            })
+        }
     }
 }
 </script>
